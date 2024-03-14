@@ -13,7 +13,7 @@ export default function AppBar() {
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button as={Link} color="primary" href="/signup" variant="flat">
+                    <Button as={Link} color="primary" href="/auth/signup" variant="flat">
                         Sign Up
                     </Button>
                 </NavbarItem>
