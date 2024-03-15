@@ -2,6 +2,7 @@
 import { User } from "@prisma/client"
 import prisma from "../prisma";
 import * as bcrypt from "bcrypt";
+import { compileActivationTemplate, sendMail } from "../mail";
 
 
 export async function registerUser(
@@ -13,4 +14,9 @@ export async function registerUser(
             password: await bcrypt.hash(user.password, 10),
         },
     });
+
+    const activationUrl = `${process.env.NEXTAUTH_URL}/auth/activate/${result.id}`
+    const body = compileActivationTemplate(user.firstName, activationUrl);
+    await sendMail({ to: user.email, subject: "Activate Your Account", body });
+    return result;
 } 

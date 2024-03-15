@@ -1,6 +1,7 @@
 import React from "react";
-import { Navbar, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { Navbar, NavbarContent, NavbarItem} from "@nextui-org/react";
 import SigninButton from "./SignInButton";
+import Link from "next/link";
 
 export default function AppBar() {
     return (
