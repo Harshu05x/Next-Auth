@@ -17,6 +17,7 @@ import { passwordStrength } from "check-password-strength";
 import PasswordStrength from "./PasswordStrength";
 import { registerUser } from "@/lib/actions/authActions";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z
     .object({
@@ -68,6 +69,7 @@ const SignUpForm = () => {
     });
     const [passStrength, setPassStrength] = useState(0);
     const [isVisiblePass, setIsVisiblePass] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         setPassStrength(passwordStrength(watch().password).id);
@@ -79,6 +81,8 @@ const SignUpForm = () => {
         try {
             const result = await registerUser(user);
             toast.success("The User Registered Successfully.");
+            reset();
+            router.push("/signin");
         } catch (error) {
             toast.error("Something Went Wrong!");
             console.error(error);
